@@ -1,16 +1,47 @@
-# שני ןטליה
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# ----------------------IMPORTS------------------------
+import pygame
+import sys
+# import Soldier
+import consts
+import screen
+# endregion--------------------------------------------
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+state = {"is_window_open":True,
+         "state": False}
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+
+
+
+
+
+
+
+
+
+
+
+def handle_user_events():
+    for event in pygame.event.get():
+
+        if event.type == pygame.QUIT:
+            state["is_window_open"] = False
+
+        elif state["state"] != consts.RUNNING_STATE:
+            continue
+
+        if event.type == pygame.KEYDOWN():
+            if event.key == pygame.K_RIGHT:
+                pass
+
+            elif event.key == pygame.K_LEFT:
+                pass
+
+            elif event.key == pygame.K_UP:
+                pass
+
+            elif event.key == pygame.K_DOWN:
+                pass
+
+
