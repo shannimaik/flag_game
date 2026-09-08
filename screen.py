@@ -4,7 +4,7 @@ import pygame
 from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
     CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS, FLAG_COLS, FLAG_ROWS, BOARD_ROWS, \
     BOARD_COLS, WHITE, BACKGROUND_COLOR, SOLDIER_WIDTH, SOLDIER_HEIGHT, \
-    FLAG_WIDTH, FLAG_HEIGHT
+    FLAG_WIDTH, FLAG_HEIGHT, MINE_HEIGHT, MINE_WIDTH
 
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -61,11 +61,34 @@ def print_matrix():
         for y in range(0, WINDOW_HEIGHT, blockSize):
             rect = pygame.Rect(x, y, blockSize, blockSize)
             pygame.draw.rect(screen, GREEN, rect, 1)
-        pygame.display.flip()
+    print_random_mine()
+    add_green_solider()
+    pygame.display.flip()
     running=True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+def print_random_mine():
+    img=pygame.image.load('mine.png')
+    num_of_mines=20
+    img = pygame.transform.scale(img, (MINE_WIDTH, MINE_HEIGHT))
+    list_of_grass_locations = []
+    for i in range(num_of_mines):
+        x = random.randrange(1, WINDOW_WIDTH,MINE_WIDTH)
+        while x + MINE_WIDTH > WINDOW_WIDTH:
+            x = random.randrange(1, WINDOW_WIDTH, MINE_HEIGHT)
+        y = random.randrange(1, WINDOW_HEIGHT, MINE_HEIGHT)
+        while y + MINE_HEIGHT > WINDOW_HEIGHT:
+              y = random.randrange(1, WINDOW_HEIGHT,MINE_HEIGHT)
+        list_of_grass_locations.append((x,y))
+        for pos in list_of_grass_locations:
+            screen.blit(img,pos)
+
+def add_green_solider():
+    img = pygame.image.load('soldier_night.png')
+    img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
+    screen.blit(img, (0, 0))
 
 print_matrix()
