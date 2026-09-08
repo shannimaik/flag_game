@@ -30,7 +30,6 @@ def print_random_grass():
     img=pygame.image.load('grass.png')
     num_of_grass=20
     img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
-    running = True
     list_of_grass_locations = []
     for i in range(num_of_grass):
         x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
@@ -40,37 +39,21 @@ def print_random_grass():
         while y + BUSH_HEIGHT > WINDOW_HEIGHT:
               y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
         list_of_grass_locations.append((x,y))
-    while running:
         for pos in list_of_grass_locations:
             screen.blit(img,pos)
-        pygame.display.flip()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
 
 
 '''prints the solider a the top left corner'''
 def add_solider():
     img = pygame.image.load('soldier.png')
     img = pygame.transform.scale(img, (SOLDIER_COLS*CELL_SIZE, SOLDIER_ROWS*CELL_SIZE))
-    running = True
-    while running:
-        screen.blit(img,(0,0))
-        pygame.display.flip()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+    screen.blit(img,(0,0))
+
 
 '''prints the solider a the bottom right corner'''
 def add_flag():
     img = pygame.image.load('flag.png')
     img = pygame.transform.scale(img, (FLAG_COLS * CELL_SIZE,
                                        FLAG_ROWS * CELL_SIZE))
-    running = True
-    while running:
-        screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
-        pygame.display.flip()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+    screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
 open_screen()
