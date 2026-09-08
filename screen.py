@@ -1,5 +1,5 @@
 import pygame
-from Tools.scripts.dutree import show
+
 WINDOW_WIDTH=50*20
 WINDOW_HEIGHT=25*20
 BACKGROUND_COLOR = (138, 201, 38)
@@ -16,3 +16,4 @@ def open_screen():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+open_screen()
