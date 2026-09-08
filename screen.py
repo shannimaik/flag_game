@@ -2,9 +2,9 @@ import random
 
 import pygame
 
-from consts import WINDOW_WIDTH, WINDOW_HEIGHT
+from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN
 
-BACKGROUND_COLOR = (0,100,0)
+BACKGROUND_COLOR = GREEN
 
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -25,16 +25,16 @@ def open_screen():
 def print_random_grass():
     img=pygame.image.load('grass.png')
     num_of_grass=20
-    img = pygame.transform.scale(img, (60, 40))
+    img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
     running = True
     list_of_grass_locations = []
     for i in range(num_of_grass):
-        x = random.randrange(1, WINDOW_WIDTH,60)
+        x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
         while x+60>WINDOW_WIDTH:
-            x = random.randrange(1, WINDOW_WIDTH, 60)
-        y = random.randrange(1, WINDOW_HEIGHT, 40)
+            x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
+        y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
         while y + 40 > WINDOW_HEIGHT:
-              y = random.randrange(1, WINDOW_HEIGHT,40)
+              y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
         list_of_grass_locations.append((x,y))
     while running:
         for pos in list_of_grass_locations:
