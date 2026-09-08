@@ -2,7 +2,8 @@ import random
 
 import pygame
 
-from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN
+from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
+    CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS
 
 BACKGROUND_COLOR = GREEN
 
@@ -13,6 +14,7 @@ def open_screen():
         pygame.display.set_caption('shanni and talya')
         screen.fill(background_color)
         print_random_grass()
+        add_solider()
         pygame.display.flip()
         running = True
         while running:
@@ -39,6 +41,19 @@ def print_random_grass():
     while running:
         for pos in list_of_grass_locations:
             screen.blit(img,pos)
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+
+'''prints the solider a the top left corner'''
+def add_solider():
+    img = pygame.image.load('soldier.png')
+    img = pygame.transform.scale(img, (SOLDIER_COLS*CELL_SIZE, SOLDIER_ROWS*CELL_SIZE))
+    running = True
+    while running:
+        screen.blit(img,(0,0))
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
