@@ -3,7 +3,8 @@ import random
 import pygame
 
 from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
-    CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS
+    CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS, FLAG_COLS, FLAG_ROWS, BOARD_ROWS, \
+    BOARD_COLS
 
 BACKGROUND_COLOR = GREEN
 
@@ -15,6 +16,7 @@ def open_screen():
         screen.fill(background_color)
         print_random_grass()
         add_solider()
+        add_flag()
         pygame.display.flip()
         running = True
         while running:
@@ -32,10 +34,10 @@ def print_random_grass():
     list_of_grass_locations = []
     for i in range(num_of_grass):
         x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
-        while x+60>WINDOW_WIDTH:
+        while x+BUSH_WIDTH>WINDOW_WIDTH:
             x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
         y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
-        while y + 40 > WINDOW_HEIGHT:
+        while y + BUSH_HEIGHT > WINDOW_HEIGHT:
               y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
         list_of_grass_locations.append((x,y))
     while running:
@@ -59,4 +61,16 @@ def add_solider():
             if event.type == pygame.QUIT:
                 running = False
 
+'''prints the solider a the bottom right corner'''
+def add_flag():
+    img = pygame.image.load('flag.png')
+    img = pygame.transform.scale(img, (FLAG_COLS * CELL_SIZE,
+                                       FLAG_ROWS * CELL_SIZE))
+    running = True
+    while running:
+        screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 open_screen()
