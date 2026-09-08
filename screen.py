@@ -1,18 +1,14 @@
-# region-----------------------IMPORTS------------------------
 import random
 import pygame
-import consts
-from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_WIDTH, BUSH_HEIGHT, \
-    SOLDIER_WIDTH, SOLDIER_HEIGHT, FLAG_HEIGHT, FLAG_WIDTH, FLAG_COLS, \
-    FLAG_ROWS, BOARD_ROWS, BOARD_COLS, CELL_SIZE
 
-# endregion---------------------------------------------------
+from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
+    CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS, FLAG_COLS, FLAG_ROWS, BOARD_ROWS, \
+    BOARD_COLS, WHITE
 
+BACKGROUND_COLOR = GREEN
 
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
-
-''' create green game background'''
 def open_screen():
         background_color = (consts.BACKGROUND_COLOR)
         pygame.display.set_caption('shanni and talya')
@@ -28,7 +24,6 @@ def open_screen():
                     running = False
 
 
-''' print 20 bushes  '''
 def print_random_grass():
     img=pygame.image.load('grass.png')
     num_of_grass=20
@@ -36,16 +31,12 @@ def print_random_grass():
     list_of_grass_locations = []
     for i in range(num_of_grass):
         x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
-        while x+60>WINDOW_WIDTH:
             x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
         y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
-        while y + 40 > WINDOW_HEIGHT:
               y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
         list_of_grass_locations.append((x,y))
         for pos in list_of_grass_locations:
             screen.blit(img,pos)
-
-
 
 
 '''prints the solider a the top left corner'''
@@ -61,5 +52,19 @@ def add_flag():
     img = pygame.transform.scale(img, (FLAG_WIDTH ,FLAG_HEIGHT))
     screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
 
-open_screen()
 
+'''prints matrix'''
+def print_matrix():
+    blockSize = 20
+    for x in range(0, WINDOW_WIDTH, blockSize):
+        for y in range(0, WINDOW_HEIGHT, blockSize):
+            rect = pygame.Rect(x, y, blockSize, blockSize)
+            pygame.draw.rect(screen, GREEN, rect, 1)
+        pygame.display.flip()
+    running=True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+print_matrix()
