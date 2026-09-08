@@ -2,7 +2,10 @@
 import random
 import pygame
 import consts
-from consts import WINDOW_WIDTH, WINDOW_HEIGHT,BUSH_WIDTH, BUSH_HEIGHT
+from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_WIDTH, BUSH_HEIGHT, \
+    SOLDIER_WIDTH, SOLDIER_HEIGHT, FLAG_HEIGHT, FLAG_WIDTH, FLAG_COLS, \
+    FLAG_ROWS, BOARD_ROWS, BOARD_COLS, CELL_SIZE
+
 # endregion---------------------------------------------------
 
 
@@ -15,6 +18,8 @@ def open_screen():
         pygame.display.set_caption('shanni and talya')
         screen.fill(background_color)
         print_random_grass()
+        add_solider()
+        add_flag()
         pygame.display.flip()
         running = True
         while running:
@@ -23,12 +28,11 @@ def open_screen():
                     running = False
 
 
-''' PRINTS 20 GRASSESS  '''
+''' print 20 bushes  '''
 def print_random_grass():
     img=pygame.image.load('grass.png')
     num_of_grass=20
     img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
-    running = True
     list_of_grass_locations = []
     for i in range(num_of_grass):
         x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
@@ -38,13 +42,24 @@ def print_random_grass():
         while y + 40 > WINDOW_HEIGHT:
               y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
         list_of_grass_locations.append((x,y))
-    while running:
         for pos in list_of_grass_locations:
             screen.blit(img,pos)
-        pygame.display.flip()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+
+
+
+
+'''prints the solider a the top left corner'''
+def add_solider():
+    img = pygame.image.load('soldier.png')
+    img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
+    screen.blit(img,(0,0))
+
+
+'''prints the solider a the bottom right corner'''
+def add_flag():
+    img = pygame.image.load('flag.png')
+    img = pygame.transform.scale(img, (FLAG_WIDTH ,FLAG_HEIGHT))
+    screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
 
 open_screen()
 
