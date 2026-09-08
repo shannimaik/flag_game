@@ -1,10 +1,9 @@
 import random
-
 import pygame
 
 from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
     CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS, FLAG_COLS, FLAG_ROWS, BOARD_ROWS, \
-    BOARD_COLS
+    BOARD_COLS, WHITE
 
 BACKGROUND_COLOR = GREEN
 
@@ -56,4 +55,20 @@ def add_flag():
     img = pygame.transform.scale(img, (FLAG_COLS * CELL_SIZE,
                                        FLAG_ROWS * CELL_SIZE))
     screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
-open_screen()
+
+
+'''prints matrix'''
+def print_matrix():
+    blockSize = 20
+    for x in range(0, WINDOW_WIDTH, blockSize):
+        for y in range(0, WINDOW_HEIGHT, blockSize):
+            rect = pygame.Rect(x, y, blockSize, blockSize)
+            pygame.draw.rect(screen, GREEN, rect, 1)
+        pygame.display.flip()
+    running=True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+print_matrix()
