@@ -1,6 +1,6 @@
 import random
 import pygame
-
+import consts
 from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
     CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS, FLAG_COLS, FLAG_ROWS, BOARD_ROWS, \
     BOARD_COLS, WHITE, BACKGROUND_COLOR, SOLDIER_WIDTH, SOLDIER_HEIGHT, \
@@ -70,6 +70,9 @@ def print_matrix():
             if event.type == pygame.QUIT:
                 running = False
 
+
+
+
 def print_random_mine():
     img=pygame.image.load('mine.png')
     num_of_mines=20
@@ -91,4 +94,18 @@ def add_green_solider():
     img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
     screen.blit(img, (0, 0))
 
-print_matrix()
+def draw_lose_message():
+    draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
+                 consts.LOSE_COLOR, consts.LOSE_LOCATION)
+
+
+def draw_win_message():
+    draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
+                 consts.WIN_COLOR, consts.WIN_LOCATION)
+
+
+def draw_message(message, font_size, color, location):
+    font = pygame.font.SysFont(consts.FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    screen.blit(text_img, location)
+

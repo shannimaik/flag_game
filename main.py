@@ -15,13 +15,6 @@ state = {"is_window_open":True,
 
 
 
-
-
-
-
-
-
-
 def handle_user_events():
     for event in pygame.event.get():
 
