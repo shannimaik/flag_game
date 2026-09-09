@@ -71,8 +71,6 @@ def print_matrix():
                 running = False
 
 
-
-
 def print_random_mine():
     img=pygame.image.load('mine.png')
     num_of_mines=20
@@ -89,21 +87,25 @@ def print_random_mine():
         for pos in list_of_grass_locations:
             screen.blit(img,pos)
 
+
+'''soldier in night mood'''
 def add_green_solider():
     img = pygame.image.load('soldier_night.png')
     img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
     screen.blit(img, (0, 0))
 
+''' print lose massage'''
 def draw_lose_message():
     draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
                  consts.LOSE_COLOR, consts.LOSE_LOCATION)
 
-
+''' print win massage'''
 def draw_win_message():
     draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
                  consts.WIN_COLOR, consts.WIN_LOCATION)
 
 
+''' print massage'''
 def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(consts.FONT_NAME, font_size)
     text_img = font.render(message, True, color)
