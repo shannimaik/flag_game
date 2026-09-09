@@ -94,6 +94,11 @@ def add_green_solider():
     img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
     screen.blit(img, (0, 0))
 
+'''print game message'''
+def draw_game_message():
+    draw_message(consts.GAME_MASSAGE_TEXT, consts.GAME_MASSAGE_FONT_SIZE,
+                 consts.GAME_MASSAGE_COLOR, consts.GAME_MASSAGE_LOCATION)
+
 ''' print lose massage'''
 def draw_lose_message():
     draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
