@@ -1,10 +1,13 @@
+
 import random
 import pygame
 import consts
+
 from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, \
     CELL_SIZE, SOLDIER_ROWS, SOLDIER_COLS, FLAG_COLS, FLAG_ROWS, BOARD_ROWS, \
     BOARD_COLS, WHITE, BACKGROUND_COLOR, SOLDIER_WIDTH, SOLDIER_HEIGHT, \
     FLAG_WIDTH, FLAG_HEIGHT, MINE_HEIGHT, MINE_WIDTH
+
 
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -16,12 +19,6 @@ def open_screen():
         add_solider()
         add_flag()
         pygame.display.flip()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-
 
 def print_random_grass():
     img=pygame.image.load('grass.png')
@@ -54,21 +51,25 @@ def add_flag():
     screen.blit(img, ((BOARD_COLS-FLAG_COLS)*CELL_SIZE,(BOARD_ROWS-FLAG_ROWS)*CELL_SIZE))
 
 
+'''soldier in night mood'''
+
+def add_green_solider():
+        img = pygame.image.load('soldier_night.png')
+        img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
+        screen.blit(img, (0, 0))
+
+
 '''prints matrix'''
 def print_matrix():
-    blockSize = 20
-    for x in range(0, WINDOW_WIDTH, blockSize):
-        for y in range(0, WINDOW_HEIGHT, blockSize):
-            rect = pygame.Rect(x, y, blockSize, blockSize)
+    screen.fill(consts.BLACK)
+    for x in range(0, WINDOW_WIDTH, CELL_SIZE):
+        for y in range(0, WINDOW_HEIGHT, CELL_SIZE):
+            rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
             pygame.draw.rect(screen, GREEN, rect, 1)
     print_random_mine()
     add_green_solider()
     pygame.display.flip()
-    running=True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+
 
 
 def print_random_mine():
@@ -86,13 +87,25 @@ def print_random_mine():
         list_of_grass_locations.append((x,y))
         for pos in list_of_grass_locations:
             screen.blit(img,pos)
+print_matrix()
+def show_the_matrix_for_one_sec():
+    print_matrix()
+    pygame.display.flip()
+    pygame.time.delay(1000)
+    open_screen()
+    pygame.display.flip()
 
 
-'''soldier in night mood'''
-def add_green_solider():
-    img = pygame.image.load('soldier_night.png')
-    img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
-    screen.blit(img, (0, 0))
+
+
+
+
+
+
+'''print game message'''
+def draw_game_message():
+    draw_message(consts.GAME_MASSAGE_TEXT, consts.GAME_MASSAGE_FONT_SIZE,
+                 consts.GAME_MASSAGE_COLOR, consts.GAME_MASSAGE_LOCATION)
 
 ''' print lose massage'''
 def draw_lose_message():

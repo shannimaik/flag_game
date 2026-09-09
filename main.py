@@ -16,15 +16,16 @@ state = {"is_window_open":True,
 
 
 def handle_user_events():
+
     for event in pygame.event.get():
 
         if event.type == pygame.QUIT:
             state["is_window_open"] = False
 
-        elif state["state"] != consts.RUNNING_STATE:
-            continue
+        # elif state["state"] != consts.RUNNING_STATE:
+        #     continue
 
-        if event.type == pygame.KEYDOWN():
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 pass
 
@@ -36,5 +37,17 @@ def handle_user_events():
 
             elif event.key == pygame.K_DOWN:
                 pass
+            elif event.key == pygame.K_RETURN:
+                screen.show_the_matrix_for_one_sec()
 
 
+
+def main():
+    running = True
+    screen.open_screen()
+    while running:
+        handle_user_events()
+
+
+if __name__ == '__main__':
+    main()
