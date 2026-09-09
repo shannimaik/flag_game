@@ -25,7 +25,3 @@ def add_flag_to_matrix(game_field):
         for j in range(consts.BOARD_COLS - consts.FLAG_COLS, consts.BOARD_COLS):
             game_field[i][j] = "FLAG"
 
-
-matrix = create()
-for row in matrix:
-    print(row)
