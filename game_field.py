@@ -4,6 +4,7 @@ from turtledemo.clock import jump
 import consts
 import random
 
+import screen
 from consts import BOARD_ROWS, BOARD_COLS, MINE_ROWS, MINE_COLS, MINES_COUNT
 
 
@@ -38,13 +39,15 @@ def add_flag_to_matrix(game_field):
 ''' add mines in random locations to the matrix'''
 def add_random_mines(game_field):
     for i in range(consts.MINES_COUNT):
-
+        mines_locations = []
         mine_row = get_random_matrix_location(1,BOARD_ROWS , MINE_ROWS)
         mine_col = get_random_matrix_location(1, BOARD_COLS,MINE_COLS)
         for i in range(MINES_COUNT):
             while not check_free(game_field, mine_row, mine_col):
                 check_free(game_field, mine_row, mine_col)
+            mines_locations.append((mine_col,mine_row))
             add_mines_to_loc(game_field, mine_row, mine_col)
+        return mines_locations
 
 
 def add_mines_to_loc(game_field ,row , col):
@@ -65,4 +68,5 @@ def get_random_matrix_location(start, range, jumps):
     while random_in_range + jumps > range:
         random_in_range = random.randrange(start, BOARD_ROWS, MINE_ROWS)
     return random_in_range
+
 

@@ -24,6 +24,7 @@ def is_valid_move(row,col):
     if col<0 or col+SOLDIER_COLS>BOARD_COLS:
         return False
     return True
+
 '''checks if the soldier legs touches the mine'''
 def check_mine_collision(game_field,row,col):
     feet_row=row+SOLDIER_BODY_ROWS
