@@ -31,3 +31,19 @@ def check_mine_collision(game_field,row,col):
         if game_field[SOLDIER_FEET_ROWS][i]=="MINE":
             return True
     return False
+
+'''DELETE THE SOLIDER FROM OLD LOCATION'''
+def remove_old_soldier_location(game_field,row,col):
+    for i in range(row,row+SOLDIER_ROWS):
+        for j in range(col,col + SOLDIER_COLS):
+            game_field[i][j]="FREE"
+
+'''adds the slider to new olace'''
+def add_new_soldier_location(game_field,row,col):
+    for i in range(row,row+SOLDIER_BODY_ROWS):
+        for j in range(col,col+SOLDIER_COLS):
+            game_field[i][j]=="SOLDIER_BODY"
+    for i in range(col, col+SOLDIER_COLS):
+        game_field[row+SOLDIER_BODY_ROWS][i]="SOLDIER_FEET"
+
+
