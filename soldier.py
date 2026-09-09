@@ -1,5 +1,8 @@
 import pygame
 
+from consts import BOARD_ROWS, BOARD_COLS, SOLDIER_ROWS, SOLDIER_COLS, \
+    SOLDIER_BODY_ROWS, SOLDIER_FEET_ROWS
+
 '''create a new solider'''
 def create_solider():
     return {"img": pygame.image.load('soldier.png'),
@@ -7,3 +10,24 @@ def create_solider():
             "list_of_legs_position":[(0,3),(1,3)],
 
     }
+'''find left corner of the soldier'''
+def find_solider(game_field):
+    for i in range(BOARD_ROWS):
+        for j in range(BOARD_COLS):
+            if game_field[i][j]=="SOLDIER_BODY":
+                return (i,j)
+
+'''checks if soldier stays in the matrix'''
+def is_valid_move(row,col):
+    if row<0 or row+SOLDIER_ROWS>BOARD_ROWS:
+        return False
+    if col<0 or col+SOLDIER_COLS>BOARD_COLS:
+        return False
+    return True
+'''checks if the soldier legs touches the mine'''
+def check_mine_collision(game_field,row,col):
+    feet_row=row+SOLDIER_BODY_ROWS
+    for i in range (col,col+SOLDIER_COLS):
+        if game_field[SOLDIER_FEET_ROWS][i]=="MINE":
+            return True
+    return False
