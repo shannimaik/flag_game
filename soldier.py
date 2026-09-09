@@ -29,7 +29,7 @@ def is_valid_move(row,col):
 def check_mine_collision(game_field,row,col):
     feet_row=row+SOLDIER_BODY_ROWS
     for i in range (col,col+SOLDIER_COLS):
-        if game_field[SOLDIER_FEET_ROWS][i]=="MINE":
+        if game_field[feet_row][i]=="MINE":
             return True
     return False
 
@@ -39,12 +39,19 @@ def remove_old_soldier_location(game_field,row,col):
         for j in range(col,col + SOLDIER_COLS):
             game_field[i][j]="FREE"
 
-'''adds the slider to new olace'''
+'''add solider to new location'''
 def add_new_soldier_location(game_field,row,col):
     for i in range(row,row+SOLDIER_BODY_ROWS):
         for j in range(col,col+SOLDIER_COLS):
             game_field[i][j]=="SOLDIER_BODY"
     for i in range(col, col+SOLDIER_COLS):
         game_field[row+SOLDIER_BODY_ROWS][i]="SOLDIER_FEET"
+
+def check_flag_collision(game_field, row, col):
+    for i in range(row, row+ SOLDIER_BODY_ROWS):
+        for j in range(col, col + SOLDIER_COLS):
+            if game_field[i][j] == "FLAG":
+                return True
+    return False
 
 
