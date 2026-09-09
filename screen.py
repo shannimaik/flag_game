@@ -72,7 +72,7 @@ def print_matrix():
     pygame.display.flip()
 
 
-''''''
+''' draw mines '''
 def print_mines(mines_locations):
     img = pygame.image.load('mine.png')
     img = pygame.transform.scale(img, (MINE_WIDTH, MINE_HEIGHT))

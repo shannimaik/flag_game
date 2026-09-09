@@ -58,7 +58,7 @@ def add_random_mines(game_field):
     return mines_locations
 
 
-
+''''''
 def add_mines_to_loc(game_field ,row , col):
     for i in range(row, row + MINE_ROWS):
         for j in range(col,col + MINE_COLS):
