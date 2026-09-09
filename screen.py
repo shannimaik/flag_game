@@ -21,11 +21,11 @@ def open_screen():
         pygame.display.flip()
 
 def print_random_grass():
+
     img=pygame.image.load('grass.png')
-    num_of_grass=20
     img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
     list_of_grass_locations = []
-    for i in range(num_of_grass):
+    for i in range(consts.BUSH_COUNT):
         x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
         while x + BUSH_WIDTH > WINDOW_WIDTH:
             x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
@@ -66,27 +66,20 @@ def print_matrix():
         for y in range(0, WINDOW_HEIGHT, CELL_SIZE):
             rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
             pygame.draw.rect(screen, GREEN, rect, 1)
-    print_random_mine()
     add_green_solider()
     pygame.display.flip()
 
 
-
-def print_random_mine():
+''''''
+def print_mines(mines_locations):
     img=pygame.image.load('mine.png')
-    num_of_mines=20
     img = pygame.transform.scale(img, (MINE_WIDTH, MINE_HEIGHT))
-    list_of_grass_locations = []
-    for i in range(num_of_mines):
-        x = random.randrange(1, WINDOW_WIDTH,MINE_WIDTH)
-        while x + MINE_WIDTH > WINDOW_WIDTH:
-            x = random.randrange(1, WINDOW_WIDTH, MINE_HEIGHT)
-        y = random.randrange(1, WINDOW_HEIGHT, MINE_HEIGHT)
-        while y + MINE_HEIGHT > WINDOW_HEIGHT:
-              y = random.randrange(1, WINDOW_HEIGHT,MINE_HEIGHT)
-        list_of_grass_locations.append((x,y))
-        for pos in list_of_grass_locations:
-            screen.blit(img,pos)
+    for location in mines_locations:
+        screen.blit(img,location)
+
+
+
+
 print_matrix()
 def show_the_matrix_for_one_sec():
     print_matrix()
