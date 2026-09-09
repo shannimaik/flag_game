@@ -25,7 +25,7 @@ def is_valid_move(row,col):
         return False
     return True
 
-'''checks if the soldier legs touches the mine'''
+'''checks if the soldier legs touches the mine --- is lose '''
 def check_mine_collision(game_field,row,col):
     feet_row=row+SOLDIER_BODY_ROWS
     for i in range (col,col+SOLDIER_COLS):
@@ -47,11 +47,13 @@ def add_new_soldier_location(game_field,row,col):
     for i in range(col, col+SOLDIER_COLS):
         game_field[row+SOLDIER_BODY_ROWS][i]="SOLDIER_FEET"
 
+''' check if soldier body touch thr flag --- is win check'''
 def check_flag_collision(game_field, row, col):
     for i in range(row, row+ SOLDIER_BODY_ROWS):
         for j in range(col, col + SOLDIER_COLS):
             if game_field[i][j] == "FLAG":
                 return True
     return False
+
 
 

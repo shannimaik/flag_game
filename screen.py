@@ -35,15 +35,6 @@ def get_grass_location():
 def print_random_grass(list_of_grass_locations):
     img=pygame.image.load('grass.png')
     img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
-    # list_of_grass_locations = []
-    # for i in range(consts.BUSH_COUNT):
-    #     x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
-    #     while x + BUSH_WIDTH > WINDOW_WIDTH:
-    #         x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
-    #     y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
-    #     while y + BUSH_HEIGHT > WINDOW_HEIGHT:
-    #           y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
-    #     list_of_grass_locations.append((x,y))
     for pos in list_of_grass_locations:
         screen.blit(img,pos)
 
@@ -83,11 +74,10 @@ def print_matrix():
 
 ''''''
 def print_mines(mines_locations):
-    img=pygame.image.load('mine.png')
+    img = pygame.image.load('mine.png')
     img = pygame.transform.scale(img, (MINE_WIDTH, MINE_HEIGHT))
-    for location in mines_locations:
-        screen.blit(img,location)
-
+    for pos in mines_locations:
+        screen.blit(img,( pos[0]*CELL_SIZE,pos[1]*CELL_SIZE))
 
 
 

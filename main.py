@@ -3,7 +3,10 @@ import pygame
 import sys
 # import Soldier
 import consts
+import game_field
 import screen
+from game_field import add_mines_to_loc, add_random_mines
+
 # endregion--------------------------------------------
 
 
@@ -44,8 +47,14 @@ def handle_user_events(list_of_grass_locations):
 
 def main():
     running = True
+    game_field_matrix = game_field.create()
+    mines_locations_list = game_field.add_random_mines(game_field_matrix)
+    print(mines_locations_list)
     list_of_grass_locations= screen.get_grass_location()
     screen.open_screen(list_of_grass_locations)
+    screen.print_mines(mines_locations_list)
+    for row in game_field_matrix:
+        print(row)
     while running:
         handle_user_events(list_of_grass_locations)
 
