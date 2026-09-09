@@ -11,30 +11,41 @@ from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, 
 
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
-def open_screen():
+def open_screen(list_of_grass_locations):
         background_color = (BACKGROUND_COLOR)
         pygame.display.set_caption('shanni and talya')
         screen.fill(background_color)
-        print_random_grass()
+        print_random_grass(list_of_grass_locations)
         add_solider()
         add_flag()
         pygame.display.flip()
 
-def print_random_grass():
-
-    img=pygame.image.load('grass.png')
-    img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
+def get_grass_location():
     list_of_grass_locations = []
     for i in range(consts.BUSH_COUNT):
-        x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
+        x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
         while x + BUSH_WIDTH > WINDOW_WIDTH:
             x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
         y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
         while y + BUSH_HEIGHT > WINDOW_HEIGHT:
-              y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
-        list_of_grass_locations.append((x,y))
-        for pos in list_of_grass_locations:
-            screen.blit(img,pos)
+            y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
+        list_of_grass_locations.append((x, y))
+    return list_of_grass_locations
+
+def print_random_grass(list_of_grass_locations):
+    img=pygame.image.load('grass.png')
+    img = pygame.transform.scale(img, (BUSH_WIDTH, BUSH_HEIGHT))
+    # list_of_grass_locations = []
+    # for i in range(consts.BUSH_COUNT):
+    #     x = random.randrange(1, WINDOW_WIDTH,BUSH_WIDTH)
+    #     while x + BUSH_WIDTH > WINDOW_WIDTH:
+    #         x = random.randrange(1, WINDOW_WIDTH, BUSH_WIDTH)
+    #     y = random.randrange(1, WINDOW_HEIGHT, BUSH_HEIGHT)
+    #     while y + BUSH_HEIGHT > WINDOW_HEIGHT:
+    #           y = random.randrange(1, WINDOW_HEIGHT,BUSH_HEIGHT)
+    #     list_of_grass_locations.append((x,y))
+    for pos in list_of_grass_locations:
+        screen.blit(img,pos)
 
 
 '''prints the solider a the top left corner'''
@@ -81,11 +92,11 @@ def print_mines(mines_locations):
 
 
 print_matrix()
-def show_the_matrix_for_one_sec():
+def show_the_matrix_for_one_sec(list_of_grass_locations):
     print_matrix()
     pygame.display.flip()
     pygame.time.delay(1000)
-    open_screen()
+    open_screen(list_of_grass_locations)
     pygame.display.flip()
 
 
@@ -116,4 +127,3 @@ def draw_message(message, font_size, color, location):
     font = pygame.font.SysFont(consts.FONT_NAME, font_size)
     text_img = font.render(message, True, color)
     screen.blit(text_img, location)
-

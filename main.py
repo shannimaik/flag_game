@@ -15,7 +15,7 @@ state = {"is_window_open":True,
 
 
 
-def handle_user_events():
+def handle_user_events(list_of_grass_locations):
 
     for event in pygame.event.get():
 
@@ -38,15 +38,16 @@ def handle_user_events():
             elif event.key == pygame.K_DOWN:
                 pass
             elif event.key == pygame.K_RETURN:
-                screen.show_the_matrix_for_one_sec()
+                screen.show_the_matrix_for_one_sec(list_of_grass_locations)
 
 
 
 def main():
     running = True
-    screen.open_screen()
+    list_of_grass_locations= screen.get_grass_location()
+    screen.open_screen(list_of_grass_locations)
     while running:
-        handle_user_events()
+        handle_user_events(list_of_grass_locations)
 
 
 if __name__ == '__main__':
