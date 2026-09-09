@@ -16,7 +16,7 @@ def open_screen(list_of_grass_locations):
         pygame.display.set_caption('shanni and talya')
         screen.fill(background_color)
         print_random_grass(list_of_grass_locations)
-        add_solider()
+        add_solider(0,0)
         add_flag()
         pygame.display.flip()
 
@@ -40,10 +40,10 @@ def print_random_grass(list_of_grass_locations):
 
 
 '''prints the solider a the top left corner'''
-def add_solider():
+def add_solider(row, col):
     img = pygame.image.load('soldier.png')
     img = pygame.transform.scale(img, (SOLDIER_WIDTH, SOLDIER_HEIGHT))
-    screen.blit(img,(0,0))
+    screen.blit(img,(col*CELL_SIZE,row*CELL_SIZE))
 
 
 '''prints the solider a the bottom right corner'''
