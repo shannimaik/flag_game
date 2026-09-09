@@ -38,7 +38,7 @@ def handle_user_events(row, col, list_of_grass_locations):
                 new_col -= 1
 
             elif event.key == pygame.K_UP:
-                new_row += 1
+                new_row -= 1
 
             elif event.key == pygame.K_DOWN:
                 new_row += 1
@@ -56,7 +56,7 @@ def main():
     mines_locations_list = game_field.add_random_mines(game_field_matrix)
 
     list_of_grass_locations= screen.get_grass_location()
-    screen.open_screen(list_of_grass_locations)
+    screen.open_screen(list_of_grass_locations,0,0)
     # screen.print_mines(mines_locations_list)
 
     while running:
@@ -66,8 +66,8 @@ def main():
 
             soldier_row = soldier_loc[0]
             soldier_col = soldier_loc[1]
-            screen.add_solider(soldier_row, soldier_col)
-            pygame.display.flip()
+            screen.open_screen(list_of_grass_locations,soldier_row, soldier_col)
+
             if event.type == pygame.QUIT:
                 running = False
 
@@ -84,7 +84,7 @@ def main():
                     new_col -= 1
 
                 elif event.key == pygame.K_UP:
-                    new_row += 1
+                    new_row -= 1
 
                 elif event.key == pygame.K_DOWN:
                     new_row += 1
@@ -94,12 +94,14 @@ def main():
 
                 soldier.is_valid_move(new_row, new_col)
                 if soldier.check_mine_collision(game_field_matrix, new_row, new_col):
-                    screen.draw_lose_message()
+                    # screen.draw_lose_message()
             #         סגירת משח
                     running = False
+                    break
                 if soldier.check_flag_collision(game_field_matrix,new_row, new_col):
-                    screen.draw_win_message()
+                    # screen.draw_win_message()
                     running = False
+                    break
             #       סגירת משחק
                 soldier.remove_old_soldier_location(game_field_matrix, soldier_row, soldier_col)
 

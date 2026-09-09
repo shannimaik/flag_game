@@ -11,12 +11,12 @@ from consts import WINDOW_WIDTH, WINDOW_HEIGHT, BUSH_HEIGHT, BUSH_WIDTH, GREEN, 
 
 screen = pygame.display.set_mode(
         (WINDOW_WIDTH, WINDOW_HEIGHT))
-def open_screen(list_of_grass_locations):
+def open_screen(list_of_grass_locations, row, col ):
         background_color = (BACKGROUND_COLOR)
         pygame.display.set_caption('shanni and talya')
         screen.fill(background_color)
         print_random_grass(list_of_grass_locations)
-        add_solider(0,0)
+        add_solider(row,col)
         add_flag()
         pygame.display.flip()
 
